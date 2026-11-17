@@ -1,0 +1,17 @@
+:root {
+  /* Renk paleti: CLAUDE.md dışında renk eklenmez. */
+  --color-night: #01132f;
+  --color-navy: #001a3d;
+  --color-blue: #007bff;
+  --color-cyan: #00d9ff;
+  --color-mist: #b8c5d6;
+  --color-white: #f8faff;
+
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --gutter: clamp(20px, 4.5vw, 72px);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 0.3s;
+  --duration-base: 0.5s;
+}

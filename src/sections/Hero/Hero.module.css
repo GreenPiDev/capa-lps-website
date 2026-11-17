@@ -1,0 +1,373 @@
+.hero {
+  /* Tüm ölçüler hem genişliğe hem yüksekliğe göre küçülür, içerik tek ekrana sığar. */
+  --logo-height: clamp(44px, min(6.5vw, 9vh), 88px);
+  --pad-block: clamp(14px, 4vh, 48px);
+
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100svh;
+  padding:
+    max(var(--pad-block), env(safe-area-inset-top))
+    max(var(--gutter), env(safe-area-inset-right))
+    max(var(--pad-block), env(safe-area-inset-bottom))
+    max(var(--gutter), env(safe-area-inset-left));
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--color-night) 0%, var(--color-night) 45%, var(--color-navy) 100%);
+}
+
+/* Arka plan katmanları */
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  --line: color-mix(in srgb, var(--color-mist) 7%, transparent);
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: clamp(56px, 7vw, 112px) clamp(56px, 7vw, 112px);
+  background-position: center top;
+  mask-image: radial-gradient(ellipse 85% 75% at 68% 40%, #000 15%, transparent 75%);
+}
+
+.glow,
+.glowLow {
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.glow {
+  width: 95vmax;
+  top: -38vmax;
+  right: -38vmax;
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-blue) 42%, transparent) 0%, transparent 62%);
+}
+
+.glowLow {
+  width: 70vmax;
+  bottom: -48vmax;
+  left: -30vmax;
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-cyan) 14%, transparent) 0%, transparent 60%);
+}
+
+.flash {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(ellipse 55% 60% at 74% 38%, color-mix(in srgb, var(--color-cyan) 20%, transparent), transparent 70%);
+}
+
+.boltWrap {
+  position: absolute;
+  top: -6%;
+  right: clamp(-6vw, 4vw - 80px, 6vw);
+  height: 112%;
+  aspect-ratio: 600 / 1000;
+  will-change: transform;
+}
+
+.bolt {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 28px color-mix(in srgb, var(--color-cyan) 45%, transparent));
+}
+
+/* Üst bar */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.logo {
+  width: auto;
+  height: var(--logo-height);
+  /* PNG'nin sol boşluğu telafi edilir, logo içerikle hizalanır. */
+  margin-inline-start: calc(var(--logo-height) * -0.32);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px 9px 13px;
+  border: 1px solid color-mix(in srgb, var(--color-mist) 20%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-navy) 55%, transparent);
+  backdrop-filter: blur(10px);
+  color: var(--color-mist);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.statusDot {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  box-shadow: 0 0 12px var(--color-cyan);
+}
+
+.statusDot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  animation: ping 2.4s var(--ease-out) infinite;
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70%,
+  100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+/* İçerik */
+
+.content {
+  align-self: center;
+  max-width: 64rem;
+  padding-block: clamp(16px, 4vh, 64px);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: clamp(10px, 2.4vh, 32px);
+  color: var(--color-cyan);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 36px;
+  height: 1px;
+  background: currentColor;
+}
+
+.title {
+  max-width: 13ch;
+  font-size: clamp(2rem, min(1.2rem + 6.2vw, 11vh), 7.5rem);
+  font-weight: 500;
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.accent {
+  color: var(--color-cyan);
+}
+
+.lead {
+  max-width: 36rem;
+  margin-top: clamp(12px, 2.8vh, 40px);
+  color: var(--color-mist);
+  font-size: clamp(0.9rem, min(0.94rem + 0.3vw, 2.3vh), 1.2rem);
+  line-height: 1.6;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.4vh, 14px);
+  margin-top: clamp(18px, 4.5vh, 72px);
+}
+
+.contactLabel {
+  color: var(--color-mist);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.contactRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+}
+
+.mail {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  max-width: 100%;
+  padding-bottom: 8px;
+  font-size: clamp(1.25rem, min(0.9rem + 2.6vw, 5.5vh), 3rem);
+  font-weight: 450;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+}
+
+.mail::before,
+.mail::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+}
+
+.mail::before {
+  background: color-mix(in srgb, var(--color-mist) 28%, transparent);
+}
+
+.mail::after {
+  background: var(--color-cyan);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.7s var(--ease-out);
+}
+
+.mailArrow {
+  flex: none;
+  width: 0.72em;
+  height: 0.72em;
+  color: var(--color-cyan);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.copy {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid color-mix(in srgb, var(--color-mist) 24%, transparent);
+  border-radius: 999px;
+  color: var(--color-mist);
+  font-size: 14px;
+  transition:
+    color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease;
+}
+
+.copy[data-copied] {
+  border-color: var(--color-cyan);
+  color: var(--color-cyan);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mail:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .mail:hover .mailArrow {
+    transform: translate(4px, -4px);
+  }
+
+  .copy:hover {
+    border-color: var(--color-cyan);
+    background: color-mix(in srgb, var(--color-cyan) 8%, transparent);
+    color: var(--color-white);
+  }
+}
+
+/* Alt bar */
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: clamp(10px, 2vh, 20px);
+  border-top: 1px solid color-mix(in srgb, var(--color-mist) 12%, transparent);
+  color: var(--color-mist);
+  font-size: 13px;
+}
+
+/* Tablet ve mobil */
+
+@media (max-width: 1024px) {
+  .boltWrap {
+    right: -14vw;
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    --logo-height: clamp(40px, 7vh, 52px);
+  }
+
+  .contactRow {
+    gap: 12px 16px;
+  }
+
+  .copy {
+    padding: 0 14px;
+    font-size: 13px;
+  }
+
+  .footer {
+    font-size: 12px;
+  }
+
+  .status {
+    padding: 7px 12px 7px 10px;
+    font-size: 12px;
+  }
+
+  .boltWrap {
+    top: -2%;
+    right: -38vw;
+    height: 72%;
+    opacity: 0.4;
+  }
+
+  .content {
+    padding-block: clamp(12px, 3vh, 40px);
+  }
+}
+
+/* Çok kısa ekranlar (ör. yatay telefon): açıklama gizlenir, başlık ve iletişim kalır. */
+@media (max-height: 520px) {
+  .lead,
+  .eyebrow {
+    display: none;
+  }
+
+  .title {
+    max-width: 20ch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .statusDot::after {
+    animation: none;
+  }
+
+  .mail::after,
+  .mailArrow,
+  .copy {
+    transition: none;
+  }
+}

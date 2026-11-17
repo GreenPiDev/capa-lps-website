@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "title": "{{brand}} | Yıldırımdan Korunma Sistemleri",
+    "description": "{{brand}} yeni web sitesi hazırlanıyor. İletişim için {{email}}"
+  },
+  "logoAlt": "{{brand}} logosu",
+  "hero": {
+    "status": "Yapım aşamasında",
+    "eyebrow": "Yıldırımdan korunma sistemleri",
+    "title": "Yeni web sitemiz <accent>çok yakında</accent> yayında.",
+    "lead": "Çalışmalarımızı en iyi şekilde yansıtacak yeni sitemiz üzerinde çalışıyoruz. Bu süre içinde soru ve talepleriniz için bize e-posta ile ulaşabilirsiniz.",
+    "contactLabel": "İletişim",
+    "mailAria": "{{email}} adresine e-posta gönder",
+    "copy": "Kopyala",
+    "copied": "Kopyalandı",
+    "copyAria": "E-posta adresini kopyala"
+  },
+  "footer": {
+    "copyright": "© {{year}} {{brand}}. Tüm hakları saklıdır."
+  }
+}
