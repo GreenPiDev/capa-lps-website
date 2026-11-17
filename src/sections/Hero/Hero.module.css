@@ -26,18 +26,6 @@
   pointer-events: none;
 }
 
-.grid {
-  position: absolute;
-  inset: 0;
-  --line: color-mix(in srgb, var(--color-mist) 7%, transparent);
-  background-image:
-    linear-gradient(to right, var(--line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
-  background-size: clamp(56px, 7vw, 112px) clamp(56px, 7vw, 112px);
-  background-position: center top;
-  mask-image: radial-gradient(ellipse 85% 75% at 68% 40%, #000 15%, transparent 75%);
-}
-
 .glow,
 .glowLow {
   position: absolute;

@@ -97,7 +97,6 @@ export function Hero() {
   return (
     <section ref={rootRef} className={styles.hero} aria-labelledby="hero-title">
       <div className={styles.backdrop} data-anim="backdrop" aria-hidden="true">
-        <div className={styles.grid} />
         <div className={styles.glow} data-depth="-40" />
         <div className={styles.glowLow} data-depth="30" />
         <div className={styles.flash} data-flash />

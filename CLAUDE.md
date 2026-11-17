@@ -6,7 +6,8 @@
 
 - Görsel veya içeriksel geliştirme yalnızca kullanıcı istediğinde yapılır. Kapsam dışına çıkılmaz.
 - Kullanıcıya sormadan tarayıcı testi yapılmaz, sunucu (`npm run dev`, `npm run preview`) ayağa kaldırılmaz.
-- Kullanıcı istemedikçe commit veya push yapılmaz.
+- Kullanıcı açıkça söylemeden hiçbir şey commit'lenmez ve pushlanmaz. `main` dalına her push Vercel'de otomatik production deploy tetikler.
+- Commit mesajlarına `Co-Authored-By` satırı veya Claude'a ait herhangi bir imza eklenmez.
 - İş bitmeden `npm run typecheck`, `npm run lint` ve `npm run build` çalıştırılır. `build`, çeviri anahtarı kontrolünü de içerir.
 - API kullanmadan önce context7 ile güncel dokümana bakılır.
 - Yeni bağımlılık eklemeden önce gerekçesi söylenir.
