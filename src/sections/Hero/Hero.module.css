@@ -85,6 +85,10 @@
   height: var(--logo-height);
   /* PNG'nin sol boşluğu telafi edilir, logo içerikle hizalanır. */
   margin-inline-start: calc(var(--logo-height) * -0.32);
+  /* Logo yalnızca görsel olarak büyür, kapladığı alan (ve diğer öğelerin yeri) değişmez.
+     Ölçek merkezi, görünen logonun sol kenarıdır; böylece içerikle hizası korunur. */
+  scale: 2;
+  transform-origin: calc(var(--logo-height) * 0.32) center;
 }
 
 /* İçerik */
