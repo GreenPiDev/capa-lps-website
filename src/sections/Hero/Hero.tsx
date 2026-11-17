@@ -1,33 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { gsap, SplitText, useGSAP } from '../../animations/gsap';
 import { SITE } from '../../content/site';
 import { Bolt } from './Bolt';
 import styles from './Hero.module.css';
 
-const COPIED_RESET_MS = 2000;
 const CURRENT_YEAR = new Date().getFullYear();
 
 export function Hero() {
   const { t, i18n } = useTranslation();
   const rootRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    if (!copied) return;
-    const id = window.setTimeout(() => setCopied(false), COPIED_RESET_MS);
-    return () => window.clearTimeout(id);
-  }, [copied]);
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(SITE.email);
-      setCopied(true);
-    } catch {
-      // Pano izni yoksa sessizce geçilir, e-posta bağlantısı yine kullanılabilir.
-    }
-  };
 
   useGSAP(
     () => {
@@ -133,10 +116,6 @@ export function Hero() {
           fetchPriority="high"
           data-anim="header"
         />
-        <p className={styles.status} data-anim="header">
-          <span className={styles.statusDot} aria-hidden="true" />
-          {t('hero.status')}
-        </p>
       </header>
 
       <div className={styles.content}>
@@ -164,15 +143,6 @@ export function Hero() {
                 <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
-            <button
-              type="button"
-              className={styles.copy}
-              onClick={copyEmail}
-              aria-label={t('hero.copyAria')}
-              data-copied={copied || undefined}
-            >
-              <span aria-live="polite">{copied ? t('hero.copied') : t('hero.copy')}</span>
-            </button>
           </div>
         </div>
       </div>
